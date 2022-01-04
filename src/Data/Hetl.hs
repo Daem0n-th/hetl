@@ -12,4 +12,4 @@ pipeline :: FilePath -> FilePath -> IO ()
 pipeline out = toCsv out . transform . fromCsv
 
 rp :: IO ()
-rp = pipeline "out.csv" "sample.csv"
+rp = pipeline "files/out.csv" "files/sample.csv"

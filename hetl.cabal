@@ -66,7 +66,7 @@ library
     -- Other library packages from which modules are imported.
     build-depends:    base ^>=4.12.0.0,
                       conduit,
-                      containers,
+                      vector,
                       bytestring,
                       text
 
