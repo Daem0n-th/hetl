@@ -93,6 +93,8 @@ test-suite hetl-test
     build-depends:    base ^>=4.12.0.0,
                       hetl,
                       hspec
+
     other-modules: Data.Hetl.ExtractSpec
+    
     build-tool-depends: hspec-discover:hspec-discover == 2.*
     
