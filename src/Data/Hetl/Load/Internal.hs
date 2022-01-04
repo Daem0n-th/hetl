@@ -2,27 +2,18 @@
 
 module Data.Hetl.Load.Internal (fromRow) where
 
-import Conduit (ConduitT, ResourceT, await, awaitForever, yield)
+import Conduit (ConduitT, ResourceT, awaitForever, yield)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
-import Data.Hetl.Internal (Header (..), Row)
-import Data.Map.Strict (Map, elems, keys)
-import Data.Text (Text)
-import qualified Data.Text as Text
+import Data.Hetl.Internal (Row)
 import Data.Text.Encoding (encodeUtf8)
+import qualified Data.Vector as Vector
+import Data.Word (Word8)
 
-writeRow :: Text -> [Text] -> ByteString
-writeRow sep = encodeUtf8 . Text.intercalate sep
+writeRow :: Word8 -> Row -> ByteString
+writeRow sep inp = Vector.foldl1 (\acc -> BS.append (acc `BS.snoc` sep)) bsRow `BS.append` "\n"
+  where
+    bsRow = Vector.map encodeUtf8 inp
 
-writeValueRow :: Monad m => Text -> ConduitT Row ByteString m ()
-writeValueRow sep = awaitForever $ \row -> yield $ BS.concat [writeRow sep $ elems row, "\n"]
-
-writeHeaderRow :: Monad m => Text -> ConduitT Row ByteString m ()
-writeHeaderRow sep = do
-  mrow <- await
-  case mrow of
-    Nothing -> return ()
-    Just row -> yield $ BS.concat [writeRow sep $ map (\(Header _ x) -> x) $ keys row, "\n", writeRow sep $ elems row, "\n"]
-
-fromRow :: Text -> ConduitT Row ByteString (ResourceT IO) ()
-fromRow sep = writeHeaderRow sep >> writeValueRow sep
+fromRow :: Word8 -> ConduitT Row ByteString (ResourceT IO) ()
+fromRow sep = awaitForever $ \row -> yield $ writeRow sep row

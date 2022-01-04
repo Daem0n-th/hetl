@@ -1,17 +1,9 @@
-module Data.Hetl.Internal (Table, Header (..), Row) where
+module Data.Hetl.Internal (Table, Row) where
 
 import Conduit (ConduitT, ResourceT)
-import Data.Map.Strict (Map)
-import Data.Maybe (fromJust)
 import Data.Text (Text)
+import Data.Vector (Vector)
 
-data Header = Header Int Text deriving (Eq, Show)
-
-instance Ord Header where
-  (Header i1 _) `compare` (Header i2 _) = i1 `compare` i2
-
-type Value = Text
-
-type Row = Map Header Value
+type Row = Vector Text
 
 type Table = ConduitT () Row (ResourceT IO) ()
