@@ -52,6 +52,7 @@ library
     exposed-modules: Data.Hetl,
                      Data.Hetl.Extract,
                      Data.Hetl.Transform,
+                     Data.Hetl.Transform.Headers,
                      Data.Hetl.Load
 
     -- Modules included in this library but not exported.
@@ -68,6 +69,7 @@ library
                       conduit,
                       vector,
                       bytestring,
+                      bytestring-conversion,
                       text
 
     -- Directories containing source files.
