@@ -53,6 +53,7 @@ library
                      Data.Hetl.Extract,
                      Data.Hetl.Transform,
                      Data.Hetl.Transform.Headers,
+                     Data.Hetl.Transform.Basics,
                      Data.Hetl.Load
 
     -- Modules included in this library but not exported.
