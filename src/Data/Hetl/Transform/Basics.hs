@@ -70,9 +70,41 @@ addFieldWith h f inp = inp .| func
       yield $ Vector.snoc hrow h
       awaitForever (\row -> yield $ Vector.snoc row (f row))
 
-addColumn :: Vector Value
-addColumn = undefined
+addColumn :: Value -> [Value] -> Table -> Table
+addColumn h hlist inp = inp .| func (h : hlist)
+  where
+    func [] = awaitForever (\r -> yield $ Vector.snoc r None)
+    func (x : xs) = do
+      hrow <- await
+      case hrow of
+        Nothing -> return ()
+        Just r -> do
+          yield $ Vector.snoc r x
+          func xs
 
-addColumnVector = undefined
+addColumnVector :: Value -> Vector Value -> Table -> Table
+addColumnVector h hvec inp = inp .| func (Vector.cons h hvec)
+  where
+    func xs
+      | xs == Vector.empty = awaitForever (\r -> yield $ Vector.snoc r None)
+      | otherwise = do
+        hrow <- await
+        case hrow of
+          Nothing -> return ()
+          Just r -> do
+            yield $ Vector.snoc r (Vector.head xs)
+            func (Vector.tail xs)
 
-addIndex = undefined
+addIndex :: Value -> Table -> Table
+addIndex h inp = inp .| (indexHeader h >> index (VInt 0))
+  where
+    indexHeader h = do
+      Just hrow <- await
+      yield $ Vector.cons h hrow
+    index i = do
+      hrow <- await
+      case hrow of
+        Nothing -> return ()
+        Just r -> do
+          yield $ Vector.cons i r
+          index $ (\(VInt x) -> VInt $ succ x) i
