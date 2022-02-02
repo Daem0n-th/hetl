@@ -6,8 +6,8 @@ import Conduit
 import Data.Hetl.Extract
 import Data.Hetl.Internal (Row, Table, Value (..))
 import Data.Hetl.Load
-import Data.Hetl.Transform.Basics
-import Data.Hetl.Transform.Headers
+import Data.Hetl.Transform.Basic
+import Data.Hetl.Transform.Header
 import Data.Vector (fromList)
 
 transform :: Table -> Table

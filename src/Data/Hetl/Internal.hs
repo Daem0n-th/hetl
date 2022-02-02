@@ -1,4 +1,4 @@
-module Data.Hetl.Internal (Table, Row, RowDict, Value (..), valueToBS) where
+module Data.Hetl.Internal (Table, Row, NamedRow (..), Value (..), valueToBS) where
 
 import Conduit (ConduitT, ResourceT)
 import Data.ByteString (ByteString, empty)
@@ -10,7 +10,7 @@ import Data.Vector (Vector)
 
 type Row = Vector Value
 
-type RowDict = Map Value Value
+data NamedRow = NamedRow Row Row
 
 type Table = ConduitT () Row (ResourceT IO) ()
 

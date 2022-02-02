@@ -98,15 +98,13 @@ A streaming data ETL (Extract, Transform and Load) library for haskell, inspired
   - [ ] XML
   - [ ] Database
 - [ ] Transform
-  - [X] Basics
-  - [X] Headers
-  - [ ] Conversion
-  - [ ] Selection
-  - [ ] Filters
-  - [ ] Maps
-  - [ ] Sorts
-  - [ ] Folds
-  - [ ] Fills
+  - [X] Basic
+  - [X] Header
+  - [ ] Filter
+  - [ ] Map
+  - [ ] Sort
+  - [ ] Fold
+  - [ ] Fill
   - [ ] Validation
   - [ ] Deduplication
 - [ ] Utils

@@ -1,4 +1,4 @@
-module Data.Hetl.Transform.Basics where
+module Data.Hetl.Transform.Basic where
 
 import Conduit
 import Data.Conduit.Internal (zipSources)

@@ -1,4 +1,4 @@
-module Data.Hetl.Transform.Headers (applyHeader, renameOne, renameMany, setHeader, extendHeader, pushHeader) where
+module Data.Hetl.Transform.Header (applyHeader, renameOne, renameMany, setHeader, extendHeader, pushHeader) where
 
 import Conduit
 import Data.ByteString.Char8 (unpack)

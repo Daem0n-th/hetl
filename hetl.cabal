@@ -52,9 +52,10 @@ library
     exposed-modules: Data.Hetl,
                      Data.Hetl.Extract,
                      Data.Hetl.Transform,
-                     Data.Hetl.Transform.Basics,
-                     Data.Hetl.Transform.Headers,
-                     Data.Hetl.Transform.Conversions,
+                     Data.Hetl.Transform.Basic,
+                     Data.Hetl.Transform.Header,
+                     Data.Hetl.Transform.Filter,
+                     Data.Hetl.Transform.Map,
                      Data.Hetl.Load
 
     -- Modules included in this library but not exported.
