@@ -100,8 +100,8 @@ A streaming data ETL (Extract, Transform and Load) library for haskell, inspired
 - [ ] Transform
   - [X] Basic
   - [X] Header
-  - [ ] Filter
-  - [ ] Map
+  - [X] Filter
+  - [X] Map
   - [ ] Sort
   - [ ] Fold
   - [ ] Fill
